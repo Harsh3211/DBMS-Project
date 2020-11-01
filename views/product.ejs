@@ -1,0 +1,106 @@
+<%- include('partials/header') %>
+<p>User Mail : <%=email%></p>
+<p>User Name : <%=username%></p>
+
+<h2><%=c_name%></h2>
+
+<br><br>
+
+<style>
+  h2 {
+    margin: 2rem;
+  }
+
+  body{
+    font-size: 1.1rem;
+  }
+  .unchecked {
+    color: grey;
+  }
+
+  #cards{
+    display: inline-block;
+    margin-left: 5rem;
+  }
+
+  #card{
+    padding: 1rem;
+  }
+</style>
+
+<%
+if(userData.length!=0){
+var i=0;
+userData.forEach(function(data){
+var discount = data.dis_percentage;
+var price = (data.price - (data.price*discount)/100).toFixed(2)
+%>
+
+
+
+<div id = 'cards' class="col-md-3 mb-5">
+  <div class="card " id = "card">
+    <div class="card-body px-2 pb-2 pt-1">
+      <div class="d-flex justify-content-between">
+        <div>
+          <p class="h4 text-primary">₹ <%=price%></p>
+        </div>
+      </div>
+      <p class="text-warning d-flex align-items-center mb-2">
+        <%for(var j=0;j<data.customer_rating;j++) {%>
+        <i class="fa fa-star"></i>
+        <%}%>
+        <%for(var j=0;j<(5-data.customer_rating);j++) {%>
+        <i class="fa fa-star unchecked" aria-hidden="true"></i>
+        <%}%>
+      </p>
+      <p class="mb-0">
+        <strong>
+          <a href="#" class="text-secondary"><%=data.p_name%></a>
+        </strong>
+      </p>
+      <p class="mb-1">
+        <small>
+          <a href="#" class="text-secondary"><%=data.b_name%></a>
+        </small>
+      </p>
+      <div class="d-flex mb-3 justify-content-between">
+        <div>
+          <p class="mb-0 small"><b>Category : </b><%=c_name%> </p>
+          <p class="mb-0 small"><b>Product : </b><%=data.product_id%></p>
+          <p class="mb-0 small"><b>Sold by : </b> <%=data.s_name%></p>
+        </div>
+        <div class="text-right">
+          <p class="mb-0 small"><b>Free Shipping</b></p>
+          <p class="mb-0 small"><b>MRP : </b> ₹ <%=data.price.toFixed(2)%></p>
+          <p class="mb-0 small text-primary">
+            <span class="font-weight-bold">Save </span> ₹ <%=(data.price - price).toFixed(2)%> (<%=data.dis_percentage%>%)
+          </p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between">
+        <div class="col px-0">
+          <button class="btn btn-outline-primary btn-block">
+            Add To Cart
+            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="ml-2">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%  i++; }) %>
+
+
+        <% } else{ %>
+      <h2>No data Obtained</h2>
+      <% } %>
+
+
+
+
+      <%- include('partials/footer') %>

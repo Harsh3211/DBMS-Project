@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<p>User Mail : <%=email%></p>
+<p>User Name : <%=username%></p>
+
+<h1>This is the Categories Tab</h1>
+<br><br>
+
+<div class="container" id='cardids'>
+  <%
+if(userData.length!=0){
+var i=0;
+userData.forEach(function(data){
+%>
+
+  <div id='cards' class="card bg-light text-secondary" style="width: 18rem;">
+    <div class="card-body ">
+      <h4 class="card-title text-dark"><%=userData[i].c_name%></h4>
+      <h5 class="card-subtitle mb-2 "><%=userData[i].category_id%></h5>
+      <a href="/products/<%=userData[i].category_id%>.<%=userData[i].c_name%>" class="card-link text-info">Link</a>
+    </div>
+  </div>
+
+  <%  i++; }) %>
+
+
+  <% } else{ %>
+  <h2>No data Obtained</h2>
+  <% } %>
+
+</div>
+
+
+
+
+
+<%- include('partials/footer') %>
