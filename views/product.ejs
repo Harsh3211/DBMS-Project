@@ -1,29 +1,30 @@
 <%- include('partials/header') %>
-<p>User Mail : <%=email%></p>
-<p>User Name : <%=username%></p>
-
-<h2><%=c_name%></h2>
-
-<br><br>
+<%=email%>
+<%=username%>
+<%=userid%>
+<div class="container">
+  <hr />
+</div>
 
 <style>
   h2 {
     margin: 2rem;
   }
 
-  body{
-    font-size: 1.1rem;
+  body {
+    font-size: 1rem;
   }
+
   .unchecked {
     color: grey;
   }
 
-  #cards{
+  #cards {
     display: inline-block;
     margin-left: 5rem;
   }
 
-  #card{
+  #card {
     padding: 1rem;
   }
 </style>
@@ -38,16 +39,16 @@ var price = (data.price - (data.price*discount)/100).toFixed(2)
 
 
 
-<div id = 'cards' class="col-md-3 mb-5">
-  <div class="card " id = "card">
+<div id='cards' class="col-md-3 mb-5">
+  <div class="card " id="card">
     <div class="card-body px-2 pb-2 pt-1">
       <div class="d-flex justify-content-between">
         <div>
-          <p class="h4 text-primary">₹ <%=price%></p>
+          <p class="h4 text-primary"><%=data.p_name%></p>
         </div>
       </div>
       <p class="text-warning d-flex align-items-center mb-2">
-        <%for(var j=0;j<data.customer_rating;j++) {%>
+        <%for(var j=0;j < (data.customer_rating); j++) {%>
         <i class="fa fa-star"></i>
         <%}%>
         <%for(var j=0;j<(5-data.customer_rating);j++) {%>
@@ -56,7 +57,7 @@ var price = (data.price - (data.price*discount)/100).toFixed(2)
       </p>
       <p class="mb-0">
         <strong>
-          <a href="#" class="text-secondary"><%=data.p_name%></a>
+          <a href="#" class="text-secondary">₹ <%=price%> </a>
         </strong>
       </p>
       <p class="mb-1">
@@ -80,10 +81,11 @@ var price = (data.price - (data.price*discount)/100).toFixed(2)
       </div>
       <div class="d-flex justify-content-between">
         <div class="col px-0">
-          <button class="btn btn-outline-primary btn-block">
+          <%link = "/add2cart/" + data.product_id + "/" + userid + "/" + data.seller_id +"/" + data.location_id +"/"+1%>
+          <a class="btn btn-outline-primary btn-block" href="<%=link%>">
             Add To Cart
-            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-          </button>
+            <i class="fa fa-shopping-cart"></i>
+          </a>
         </div>
         <div class="ml-2">
 
@@ -96,11 +98,11 @@ var price = (data.price - (data.price*discount)/100).toFixed(2)
 <%  i++; }) %>
 
 
-        <% } else{ %>
-      <h2>No data Obtained</h2>
-      <% } %>
+<% } else{ %>
+<h2>No data Obtained</h2>
+<% } %>
 
 
 
 
-      <%- include('partials/footer') %>
+<%- include('partials/footer') %>

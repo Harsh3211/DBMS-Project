@@ -21,6 +21,7 @@ module.exports.authenticate = function(req, res) {
           req.session.loggedin = true;
           req.session.username = results[0].name;
           req.session.email = results[0].email;
+          req.session.userid = results[0].id;
           console.log(results);
           res.redirect('/dashboard');
         } else {
