@@ -1,7 +1,6 @@
 <%- include('partials/header') %>
-<%=email%>
-<%=username%>
-<%=userid%>
+
+<p class="h1 text-primary " align="center"><%=c_name%></p>
 <div class="container">
   <hr />
 </div>
@@ -81,7 +80,7 @@ var price = (data.price - (data.price*discount)/100).toFixed(2)
       </div>
       <div class="d-flex justify-content-between">
         <div class="col px-0">
-          <%link = "/add2cart/" + data.product_id + "/" + userid + "/" + data.seller_id +"/" + data.location_id +"/"+1%>
+          <%link = "/add2cart/" + data.product_id + "/" + userid + "/" + data.seller_id +"/"+1%>
           <a class="btn btn-outline-primary btn-block" href="<%=link%>">
             Add To Cart
             <i class="fa fa-shopping-cart"></i>

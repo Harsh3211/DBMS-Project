@@ -5,6 +5,7 @@ var connection = require('./../config');
 module.exports.authenticate = function(req, res) {
   var email = req.body.email;
   var password = req.body.password;
+  var location = req.body.location;
 
 
   connection.query('SELECT * FROM users WHERE email = ?', [email], function(error, results, fields) {
@@ -22,21 +23,15 @@ module.exports.authenticate = function(req, res) {
           req.session.username = results[0].name;
           req.session.email = results[0].email;
           req.session.userid = results[0].id;
+          req.session.location = location;
           console.log(results);
           res.redirect('/dashboard');
         } else {
-          // res.json({
-          //   status:false,
-          //   message:"Email and password does not match"
-          //  });
+          console.log('error1');
           res.redirect('/register');
         }
-
       } else {
-        // res.json({
-        //     status:false,
-        //   message:"Email does not exits"
-        // });
+        console.log('error2');
         res.redirect('/register');
       }
     }

@@ -1,0 +1,80 @@
+<%- include('partials/header') %>
+<br>
+<p class="h1 text-primary " align="center">Orders</p>
+<style>
+  .right {
+    float: right;
+  }
+
+  #cards {
+    display: inline-block;
+    padding: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  #card {
+    padding: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+</style>
+<div class="container">
+  <%
+var i = 1;
+var total_price = 0;
+var net_quantity = 0;
+var price = 0;
+var city;
+var area;
+if(orders.length!=0) {
+  orders.forEach(function(data){
+    total_price = 0;
+    net_quantity = 0;
+    console.log(data.order_id);
+%>
+  <div id='cards' class="col-md-12 mb-5">
+    <div class="card " id="card">
+      <div class="card-body px-2 pb-2 pt-1">
+        <p class="h3 text-primary">Order <%=i%> </p>
+        <p class="h5 text-primary">Order id: <a href='#' class="text-success right"><%=data.order_id%></a></p>
+
+
+        <%
+      userData.forEach(function(data1){
+        if(data.order_id == data1.order_id)  {
+        price = data1.price - (data1.price*data1.dis_percentage )/100;
+        total_price = total_price + (price *  data1.quantity);
+        net_quantity = net_quantity + data1.quantity;
+        city = data1.city;
+        area = data1.area_name;
+        %>
+        <p class="h5 text-secondary"><%=data1.p_name%> (<%=data1.b_name%>) : (<%=data1.s_name%>) (<%=data1.sh_name%>)<a href='#' class="right text-success"><strong class=" text-primary">₹ <%=price.toFixed(2)%></strong> (<%=data1.price.toFixed(2)%> - <%=((data1.price*data1.dis_percentage )/100).toFixed(2)%>) (<%=data1.dis_percentage%>)% off x <%=data1.quantity%></a></p>
+      <%
+      }
+      }); // Userdata
+      %>
+
+        <p class="h4 text-primary">Total Amount(<%=net_quantity%>) : <a href='#' class="right h4">₹ <%=total_price.toFixed(2)%> </a></p>
+        <p class="h4 text-primary">Payment : <a href='#' class="right h4 text-danger">Paid</a></p>
+        <p class="h4 text-primary">Deliver At : <a href='#' class="right h4 text-danger"><%=area%>, <%=city%></a></p>
+
+      </div>
+    </div>
+  </div>
+  <%
+i++;
+}); // orders
+%>
+
+  <%
+} else {
+%>
+  <p class="h6 text-primary">No data Available</p>
+
+  <%}%>
+
+</div>
+
+
+      <%- include('partials/footer') %>

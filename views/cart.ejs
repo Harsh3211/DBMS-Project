@@ -1,7 +1,5 @@
 <%- include('partials/header') %>
-<%=email%>
-<%=username%>
-<%=userid%>
+
 <div class="container">
   <hr />
 </div>
@@ -28,7 +26,7 @@
     padding: 1rem;
   }
 
-  .container{
+  .container {
     margin-right: 2rem;
   }
 
@@ -36,25 +34,25 @@
     float: right;
   }
 
-  .btn{
-      margin-left: 0.5rem;
+  .btn {
+    margin-left: 0.5rem;
   }
-
 </style>
-<div class='container'>
-<p id='total' class="h3 text-primary text-right">Sub-total : 0.00 </p><br>
-<div class="right">
-<a href="#" class="btn btn-outline-success " role="button" aria-disabled="true">Check Out</a>
-<a href="/categories" class="btn btn-outline-primary " role="button" aria-disabled="true">Continue Shopping</a>
-</div>
-<br>
 
-
-</div>
 <%
 if(userData.length!=0) {
 var total_price = 0;
-var net_quantity = 0;
+var net_quantity = 0;%>
+<div class='container'>
+  <p id='total' class="h3 text-primary text-right">Sub-total : 0.00 </p><br>
+  <div class="right">
+    <a href="/payment/<%=total_price%>" id='checkout' class="btn btn-outline-success " role="button" aria-disabled="true">Check Out</a>
+    <a href="/categories" class="btn btn-outline-primary " role="button" aria-disabled="true">Continue Shopping</a>
+  </div>
+  <br>
+</div>
+
+<%
 userData.forEach(function(data){
 var discount = data.dis_percentage;
 var price = data.price - (data.price*discount)/100;
@@ -69,7 +67,7 @@ net_quantity = net_quantity + data.quantity;
     <div class="card-body px-2 pb-2 pt-1">
       <div class="d-flex justify-content-between">
         <div>
-          <p class="h4 text-primary"><%=data.p_name%> </p>
+          <p class="h3 text-primary"><%=data.p_name%> </p>
         </div>
       </div>
       <p class="text-warning d-flex align-items-center mb-2">
@@ -90,16 +88,16 @@ net_quantity = net_quantity + data.quantity;
           <a href="#" class="text-secondary"><%=data.b_name%></a>
         </small>
       </p>
-      <div class="d-flex mb-3 justify-content-between">
+      <div class="d-flex mb-2 justify-content-between">
         <div>
-          <p class="mb-0 small"><b>Category : </b><%=data.c_name%> </p>
-          <p class="mb-0 small"><b>Product : </b><%=data.product_id%></p>
-          <p class="mb-0 small"><b>Sold by : </b> <%=data.s_name%></p>
+          <p class="mb-0 "><b>Category : </b><%=data.c_name%> </p>
+          <p class="mb-0 "><b>Product : </b><%=data.product_id%></p>
+          <p class="mb-0 "><b>Sold by : </b> <%=data.s_name%></p>
         </div>
         <div class="text-right">
-          <p class="mb-0 small"><b>Quantity : </b> <%=data.quantity%></p>
-          <p class="mb-0 small"><b>MRP : </b> ₹ <%=data.price.toFixed(2)%></p>
-          <p class="mb-0 small text-primary">
+          <p class="mb-0  "><b>Quantity : </b> <%=data.quantity%></p>
+          <p class="mb-0  "><b>MRP : </b> ₹ <%=data.price.toFixed(2)%></p>
+          <p class="mb-0   text-primary">
             <span class="font-weight-bold">Save </span> ₹ <%=(data.price - price).toFixed(2)%> (<%=data.dis_percentage%>%)
           </p>
         </div>
@@ -120,6 +118,7 @@ net_quantity = 0;
 
 <script>
   document.getElementById("total").innerHTML = "Subtotal(<%=net_quantity%>) : ₹ <strong><%=total_price.toFixed(2)%> <strong>";
+  document.getElementById("checkout").href = '/payment/<%=total_price.toFixed(2)%>';
 </script>
 
 
