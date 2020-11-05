@@ -48,8 +48,9 @@ if(orders.length!=0) {
         net_quantity = net_quantity + data1.quantity;
         city = data1.city;
         area = data1.area_name;
+        time = data1.order_datetime;
         %>
-        <p class="h5 text-secondary"><%=data1.p_name%> (<%=data1.b_name%>) : (<%=data1.s_name%>) (<%=data1.sh_name%>)<a href='#' class="right text-success"><strong class=" text-primary">₹ <%=price.toFixed(2)%></strong> (<%=data1.price.toFixed(2)%> - <%=((data1.price*data1.dis_percentage )/100).toFixed(2)%>) (<%=data1.dis_percentage%>)% off x <%=data1.quantity%></a></p>
+        <p class="h5 text-secondary"><%=data1.p_name%> (<%=data1.b_name%>) : (<%=data1.s_name%>) (<%=data1.sh_name%>)<a href='#' class="right text-success"><strong class=" text-primary">₹ <%=price.toFixed(2)%></strong> <s class="text-danger">₹<%=data1.price.toFixed(2)%></s> <i>(Save ₹<%=((data1.price*data1.dis_percentage )/100).toFixed(2)%> (<%=data1.dis_percentage%>%))</i> <strong class="text-primary">x <%=data1.quantity%></strong></a></p>
       <%
       }
       }); // Userdata
@@ -58,6 +59,7 @@ if(orders.length!=0) {
         <p class="h4 text-primary">Total Amount(<%=net_quantity%>) : <a href='#' class="right h4">₹ <%=total_price.toFixed(2)%> </a></p>
         <p class="h4 text-primary">Payment : <a href='#' class="right h4 text-danger">Paid</a></p>
         <p class="h4 text-primary">Deliver At : <a href='#' class="right h4 text-danger"><%=area%>, <%=city%></a></p>
+        <p class="h4 text-primary">Order on : <a href='#' class="right h4 text-danger"><%=time%></a></p>
 
       </div>
     </div>
